@@ -51,3 +51,16 @@ for xml_file, output_csv, person in people_data:
             writer.writerow(row)
 
     print(f"Exported {len(records)} records to '{output_csv}' with person='{person}'.")
+
+# Combine shlok.csv and akhil.csv into raw_data.csv
+with open('data/raw_data.csv', mode='w', newline='', encoding='utf-8') as outfile:
+    writer = None
+    for file in [shlok_csv, akhil_csv]:
+        with open(file, mode='r', encoding='utf-8') as infile:
+            reader = csv.DictReader(infile)
+            if writer is None:
+                writer = csv.DictWriter(outfile, fieldnames=reader.fieldnames)
+                writer.writeheader()
+            for row in reader:
+                writer.writerow(row)
+print("Combined both CSVs into 'data/raw_data.csv'")
