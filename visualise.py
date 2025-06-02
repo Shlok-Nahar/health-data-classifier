@@ -52,7 +52,7 @@ def generate_comparison_plots(data_path, output_pdf, sample_size=1000):
         if not features_df.empty:
             scaler = StandardScaler()
             features_scaled = scaler.fit_transform(features_df)
-            pca = PCA(n_components=2).fit_transform(features_scaled)
+            pca = PCA(n_components=2, random_state=0).fit_transform(features_scaled)
             plt.figure(figsize=(8, 6))
             plt.scatter(
                 pca[:, 0], pca[:, 1],
